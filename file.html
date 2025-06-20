@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Happy Birthday </title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Playfair-Display:wght@400;600;700&family+inter:wght@300;400;500&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            } 
+
+            body {
+                font-family: "inter", sans-serif;
+                background: linear-gradient(
+                    -45deg,
+                    #ffeef8,
+                    #f8e8ff,
+                    #ffe8f0,
+                    #fff0f8
+                );
+                background-size: 400% 400%;
+                animation: etherealFlow 12s ease infinite;
+                min-height: 100vh;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            @keyframes etherealFlow {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            /* Floating Elements */
+            .floating-element {
+                position: absolute;
+                border-radius: 50%;
+                opacity: 0.7;
+                animation: gentleFloat 8s ease-in-out infinite;
+                z-index: 1;
+            }
+
+            .floating-photo {
+                width: 60px;
+                height: 60px;
+                border: 2px solid rgba(255, 282, 293, 0.4);
+                box-shadow: 0 8px 32px rgba(255, 105, 180, 0.15);
+                object-fit: cover;
+                backdrop-filter: blur(4px);
+            }
+
+            .floating-shape {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 182, 19, 0.3),
+                    rgba(255, 105, 180, 0.2)
+                );
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .small {
+                width: 20px;
+                height: 20px;
+            }
+            .medium {
+                width: 40px;
+                height: 40px;
+            }
+            .large {
+                width: 80px;
+                height: 40px;
+            }
+
+            @keyframes gentleFloat {
+                0%,
+                100% {
+                    transform: translateY(0px) translateX(0px) rotate(0deg);
+                    opacity: 0.7;
+                }
+                33% {
+                    transform: translateY(-30px) translateX(20px) rotate(120px);
+                    opacity: 0.4;}
+                
+                66% {
+                    transform: translateY(20px) translateX(-15px) rotate(240px);
+                    opacity: 0.8;
+                }
+            }
+
+            /* Main Container */
+            .container {
+                position: relative;
+                z-index: 10;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+
+            .birthday-card {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(20px);
+                border-radius: 40px;
+                padding: 80px 60px;
+                text-align: center;
+                box-shadow:
+                    0 20px 60px rgba(255, 105, 180, 0.1),
+                    0 0 0 1px rgba(255, 255, 255, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .birthday-card::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(
+                    45deg,
+                    transparent,
+                    rgba(255, 182, 192, 0.1),
+                    transparent
+                );
+                animation: shimmer 4s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                }
+                50% {
+                    transform: translateX(100%) translateY(100%) rotate(45deg);
+                }
+                100% {
+                    transform: translateX(100%) translateY(100%) rotate(45deg);
+                }
+            }
+
+            /* Typography */
+            .main-title {
+                font-family: "Playfair Display", serif;
+                font-size: 3rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, #d63384, #e91e63, #ff6b9d);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 20px;
+                animation: titleGlow 3s ease-in-out infinite alternate;
+                position: relative;
+                z-index: 10;
+            }
+
+            @keyframes titleGlow {
+                from {
+                    filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.3));
+                }
+                to {
+                    filter: drop-shadow(0 0 40px rgba(233, 30, 99, 0.6));
+                }
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                color: #8e4f6b;
+                font-weight: 300;
+                margin-bottom: 50px;
+                opacity: 0;
+                animation: fadeInUp 1s ease-out 0.5s forwards;
+                z-index:10;
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /*Photo Gallery */
+            .photo-section {
+                margin: 60px;
+                opacity: 0;
+                animation: fadeInUp 1s ease-out 1s forwards;
+            }
+
+            .photo-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin: 40px 0;
+                align-items: center;
+            }
+
+
+            .photo-item {
+                position: relative;
+                border-radius: 25px;
+                overflow: hidden;
+                /* height: 100px; */
+                aspect-ratio: auto;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .photo-item:hover {
+                transform: translateY(-10px) scale(1.05);
+                box-shadow: 0 25px 50px rgba(233, 30, 99, 0.2);
+            }
+
+            .photo-item img {
+                width: 100%;
+                object-fit: cover;
+                transition: transform 0.4s ease;
+            }
+
+            .photo-item:hover img {
+                transform: scale(1.1);
+            }
+
+            .photo-item::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 182, 192, 0.2),
+                    rgba(255, 105, 180, 0.3)
+                );
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+            .photo-item:hover::after {
+                opacity: 1;
+            }
+
+            /* Message Section */
+            .message-section {
+                background: linear-gradient(
+                    135deg
+                    rgba(255, 182, 193, 0.1),
+                    rgba(255, 105, 180, 0.05)
+                );
+                border-radius: 30px;
+                padding: 50px 40px;
+                margin: 60px 0;
+                border: 1px solid rgba(255, 182, 193, 0.2);
+                opacity: 0;
+                animation: fadeInUp 1s ease-out 1.5s forwards;
+            }
+
+            .message-title {
+                font-family: "Playfair Display", serif;
+                font-size: 2rem;
+                color: #d63384;
+                margin-bottom: 25px;
+                font-weight: 600;
+            }
+
+            .message-text {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                color: #6b4c57;
+                font-weight: 400;
+            }
+
+            /* Decorative Elements */
+            .decorative-icon {
+                font-size: 3rem;
+                margin: 30px 0;
+                animation: bounce 2s ease-in-out infinite;
+                display: inline-block;
+                z-index: 10;
+            }
+
+            @keyframes bounce {
+                0%,
+                20%,
+                50%, 
+                80%,
+                100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-15px);
+                }
+                60% {
+                    transform: translateY(-7px);
+                }
+            }
+
+            .sparkles {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: #ff69b4;
+                border-radius: 50%;
+                animation: sparkle 2s linear infinite;
+            }
+
+            @keyframes sparkle {
+                0%,
+                100% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            /* Footer */
+            .footer-message {
+                margin-top: 50px;
+                font-family: "Playfair Display", serif;
+                font-size: 1.3rem;
+                color: #d63384;
+                font-style: italic;
+                opacity: 0;
+                animation: fadeInUp 1s ease-out 2s forwards;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .birthday-card {
+                    padding: 50px 30px;
+                    border-radius: 30px;
+                }
+
+                .main-title {
+                    font-size: 2.5rem;
+                }
+
+                /* .photo-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 20px;
+                } */
+
+                .message-section {
+                    padding: 40px 25px;
+                }
+                .photo {
+                    display:none;
+                }
+                .photo-section{
+                    margin: 0;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .subtitle{
+                    font-size: 0.9rem;
+                }
+                .photo-section{
+                    margin: 0;
+                }
+                .photo {
+                    display:none;
+                }
+                .container {
+                    padding: 20px 10px;
+                }
+
+                .main-title {
+                    font-size: 2rem;
+                }
+
+                /* .photo-grid {
+                    grid-template-columns: 1fr;
+                } */
+            }
+            .photo-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+
+            .photo {
+                position: absolute;
+                width: 80px;
+                height: 80px;object-fit: cover;
+                object-fit: cover;
+                border-radius: 16px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                left: var(--x);
+                top: var(--y);
+                animation: float 20s ease-in-out infinite;
+                animation-delay: var(--d);
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0.8;
+                }
+                50% {
+                    transform: translateY(-100px) rotate(10deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(0) rotate(-10deg);
+                    opacity: 0.8;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Floating Background Elements -->
+        <div class="floating-container"></div>
+        <div class="sparkles-container"></div>
+
+        <div class="container">
+            <div class="photo-container">
+                <img
+                    src="img/sejarah/sej-1.jpeg"
+                    class="photo"
+                    style="--x: 750px; --y: 300px; --d: 0s"
+                />
+                <img
+                    src="img/sejarah/sej-2.jpeg"
+                    class="photo"
+                    style="--x: 600px; --y: 350px; --d: 2s"
+                />
+                <img
+                    src="img/sejarah/sej-3.jpeg"
+                    class="photo"
+                    style="--x: 750px; --y: 450px; --d: 4s"
+                />
+                <img
+                    src="img/sejarah/sej-4.jpeg"
+                    class="photo"
+                    style="--x: 250px; --y: 350px; --d: 6s"
+                />
+                <img
+                    src="img\sejarah\sej-5.jpg"
+                    class="photo"
+                    style="--x: 50px; --y: 300px; --d: 1s"
+                    />
+                <!-- Tambahkan lebih banyak gambar -->
+            </div>
+            <div class="birthday-card">
+                <h1 class="main-title"> Barakallahu Fi Umrik, Ibu Bida!</h1>
+                <p class="subtitle">
+                    Semoga umur berkah barokah, sehat selalu, dan bahagia dunia akhirat bersama keluarga tercinta. Amiinnn <br> Terima kasih telah menjadi wali kelas yang luar biasa Ibu!
+                    </p>
+
+                    <div class="decorative-icon">🌸</div>
+
+                    <div class="photo-section">
+                        <div class="photo-grid">
+                            <div class="photo-item">
+                                <img
+                                    src="img/foto-kelas.jpg"
+                                />
+                            </div>
+                            <div class="photo-item">
+                                <img
+                                src="img\kls-1.jpg"
+                                />
+                            </div>
+                            <div class="photo-item">
+                                <img
+                                    src="img\kls-2.jpg"
+                                />
+                            </div>
+                            <div class="photo-item">
+                                <img
+                                    src="img\kls-3.jpg"
+                                />
+                            </div>
+                            <div class="photo-item">
+                                <img
+                                    src="img\kls-4.jpg"
+                                />
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                    <div class="message-section">
+                        <h2 class="message-title">A Special Wish</h2>
+                        <p class="message-text">
+                           love Ibu Bidayatul Hidayah dan X Keterampilan 2 
+                        </p>
+                    </div>
+
+                    <div class="decorative-icon">✨</div>
+
+                    <p class="footer-message">with </p>
+                </div>
+            </body>
+
+            <script>
+                // Create floating elements
+                function createFloatingElement() {
+                    const container = document.querySelector(".floating-container");
+
+                    // Create floating photos
+                    for (let i = 0; i < 8; i++) {
+                        const photo = document.createElement("img");
+                        photo.className = "floating-element floating-photo";
+                        photo.src = `https//picsum.photos/60/60?random=${Math.floor(Math.random() * 100)}`;
+
+                        // Random positioning
+                        photo.style.left =
+                        Math.random() * (window.innerWidth - 60) + "px";
+                        photo.style.animationDelay = Math.random() * 8 + "s";
+                        photo.style.animationDuration = Math.random() * 4 + 6 + "s";
+
+                        container.appendChild(photo);
+                    }
+
+                    // create floating shapes
+                    for (let i = 0; i < 15; i++) {
+                        const shape = document.createElement("div");
+                        shape.className = "floating-element floating-shape";
+
+                        // Random size
+                        const sizes = ["small", "medium", "large"];
+                        shape.classList.add(
+                            sizes[Math.floor(Math.random() * sizes.length)],
+                        );
+
+                        // Random positioning
+                        shape.style.left = Math.random() * window + innerWidth + "px";
+                        shape.style.top = Math.random() * window.innerHeight + "px";
+                        shape.style.animationDelay = Math.random() * 8 + "s";
+                        shape.style.animationDuration = Math.random() * 6 + 8 + "s";
+                        
+                        container.appendChild(shape);
+                    }
+                }
+
+                // Create sparkles
+                function createSparkles() {
+                    const container = document.querySelector(".sparkles-container");
+
+                    for (let i = 0; i < 20; i++) {
+                        const sparkle = document.createElement("div");
+                        sparkle.className = "sparkles";
+                        sparkle.style.left = Math.random() * 100 + "vw";
+                        sparkle.style.top = Math.random() * 100 + "vh";
+                        sparkle.style.animationDelay = Math.random() * 2 + "s";
+                        sparkle.style.animationDuration = 
+                            Math.random() * 2 +1 + "s";
+
+                        container.appendChild(sparkle);
+                    }
+                }
+
+                //initialize
+                createFloatingElement();;
+                createSparkles();
+
+                // Add parallax effect to floating elements
+                window.addEventListener("mousemove", (e) => {
+                    const photos = document.querySelectorAll(".floating.photo");
+                    const shapes = document.querySelectorAll(".floating-shape");
+
+                    const mouseX = e.clientX / window.innerWidth;
+                    const mouseY = e.clientY / window.innerHeight;
+
+                    photos.forEach((photo, index) => {
+                        const speed = ((index % 3) + 1) * 0.5;
+                        const x = (mouseX - 0.5) * speed * 20;
+                        const y = (mouseY - 0.5) * speed * 20;
+                        photo.style.transform = ` translate(${x}px, ${y}px)`;
+                    });
+
+                    shapes.forEach((shape, index) => { 
+                        const speed = ((index % 2) + 1) * 0.3;
+                        const x = (mouseX - 0.5) * speed * 15;
+                        const y = (mouseY - 0.5) * speed * 15;
+                        shape.style.transform += ` translate(${x}px, ${y}px)`;
+                    });
+                });
+
+                // Add click interaction to decorative icons
+                document.querySelectorAll(".decorative-icon").forEach((icon) => {
+                    icon.addEventListener("click", () => {
+                        icon.style.transform = "scale(1.3) rotate(360deg)";
+                        icon.style.transition = "transform 0.5s ease";
+
+                        setTimeout(() => {
+                            icon.style.transform = "";
+                        }, 500);
+
+                        // Create extra sparkles
+                        for (let i = 0; i < 10; i++) {
+                            setTimeout(() => {
+                                const sparkle = document.createElement("div");
+                                sparkle.className = "sparkle";
+                                sparkle.style.position = "fixed";
+                                sparkle.style.left = Math.random() * 100 + "vw";
+                                sparkle.style.top = Math.random() * 100 + "vh";
+                                sparkle.style.background = [
+                                    "#ff69b4",
+                                    "#ffd700",
+                                    "#ff6347",
+                                    "#9370db",
+                                ][Math.floor(Math.random() * 4)];
+                                document.body.appendChild(sparkle);
+
+                                setTimeout(() => sparkle.remove(), 2000);
+                            }, i * 100);
+                        }
+                    });
+                });
+
+                // Refresh floating elements on resize
+                window.addEventListener("resize", () => {
+                    document.querySelector(".floating-container").innerHTML = "";
+                    creatFloatingElements();
+                });
+
+                // Add smooth scroll reveal effecty
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px",
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = "1";
+                            entry.target.style.transform = "translateY(0)";
+                        }
+                    });
+                }, observerOptions);
+
+                // Observer elements for scroll animation
+                document.querySelectorAll(".photo-item, .message-section")
+                .forEach((el) => {
+                    observer.observe(el);
+                });
+            </script>
+                            
+    </body>
+                        
+</html>
